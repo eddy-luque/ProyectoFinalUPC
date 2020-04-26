@@ -1,18 +1,13 @@
 require_relative 'persona'
-
 class Alumno < Persona
-  attr_accessor :edad, :genero, :arrayTutor, :colegioNacional, :colegioParticular
+  attr_accessor :tutores
   def initialize(dni, apellido, nombre, edad, genero)
     super(dni, apellido, nombre)
-    @edad = edad
-    @genero = genero
-    @arrayTutor = []
-    @colegioNacional = nil
-    @colegioParticular = nil
+    @tutores = []
   end
 
   def registrarTutor(tutor)
-    arrayTutor.push(tutor)
+    tutores.push(tutor)
   end
 
   def calcularPuntajeCS()
