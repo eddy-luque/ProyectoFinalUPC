@@ -38,8 +38,7 @@ class App
 
 	def registrarAlumnoAtomico(*arg)
 		cAdm = ControllerAdministrador.new(v, a)
-	    cAdm.registrarAlumnoAtomico(*arg)
-	    inicioAdm
+		cAdm.registrarAlumnoAtomico(*arg)
 	end
 
 	def listarAlumnos
