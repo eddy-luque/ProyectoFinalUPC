@@ -1,11 +1,17 @@
 class Administrador
-	attr_accessor :alumnos
+	attr_accessor :alumnos, :preguntas
 	def initialize()
 		@alumnos = []
+		@preguntas = []
 	end
 
 	def registrarAlumno(alumno)
 		alumnos.push(alumno)
+		"Ok"
+	end
+
+	def registrarPregunta(pregunta)
+		preguntas.push(pregunta)
 		"Ok"
 	end
 

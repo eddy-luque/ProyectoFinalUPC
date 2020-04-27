@@ -13,7 +13,7 @@ class View
   end
 
   def mostrarMenuAdministrador
-    u.crearMenu("Seleccione una opción",["Registrar Alumno","Reporte","Regresar"])
+    u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Reporte Alumno","Reporte Pregunta","Regresar"])
   end
 
   def solicitarDNITutor
@@ -24,8 +24,16 @@ class View
     u.crearMenu("Seleccionar Parentesco",["Madre", "Padre", "Tio/Tia", "Otro"])
   end
 
+  def solicitarMcaOtraAlternativa
+    u.crearMenu("¿Desea registrar otra Alternativa?",["Si", "No"])
+  end
+
   def solicitarMcaOtroTutor
     u.crearMenu("¿Desea registrar otro tutor?",["Si", "No"])
+  end
+
+  def solicitarDNI
+    u.solicitarDato("Ingresar su DNI:", "'$in' no es un DNI correcto", nil,'dni')
   end
 
   def solicitarDatosTutor
@@ -50,12 +58,35 @@ class View
     end
   end
 
+  def solicitarDatosPregunta
+    pregunta = u.solicitarDato("Ingrese la Pregunta:", nil, nil, nil,2,150)
+    tipoExamen = u.crearMenu("Seleccione el tipo de examen",["Examen de 10 preguntas","Examen de 20 preguntas"])
+    return pregunta, tipoExamen
+  end
+
+  def solicitarDatosAlternativa(n)
+    alternativa = u.solicitarDato("Ingrese la Alternativa #{n}:", nil, nil, nil,2,150)
+    codigo = (n+96).chr
+    return codigo, alternativa
+  end
+
+  def solicitarRespuesta(pregunta)
+    alternativas = []
+    for alternativa in pregunta.alternativas
+      alternativas.push([alternativa.codigo, alternativa.alternativa])
+    end
+    u.crearMenu("Ingrese la alternativa correcta.\n#{pregunta.pregunta}",alternativas)
+  end
+
   def mostrarMensaje(o, e)
     if o == 'Ok'
       puts "El #{e} se registró correctamente"
     else
       puts "Ocurió un error: #{o}"
     end
+  end
+  def mostrarMensajePregunta
+    puts "La pregunta se registró correctamente"
   end
 
   def listarAlumnos(l)
@@ -64,5 +95,14 @@ class View
       nl.push([i.nombre,i.dni,i.tutores[0].nombre])
     end
     u.imprimirArreglo(nl,"Lista de Alumnos")
+  end
+
+  def listarPreguntas(l)
+    for i in 0...l.size
+      puts "#{i+1}. #{l[i].pregunta}"
+      for alternativa in l[i].alternativas
+          puts "   #{alternativa.codigo}. #{alternativa.alternativa}"
+      end
+    end
   end
 end

@@ -1,5 +1,7 @@
 require_relative '../Factory/FactoryAlumno'
 require_relative '../Factory/FactoryTutor'
+require_relative '../Factory/FactoryPregunta'
+require_relative '../Factory/FactoryAlternativa'
 class ControllerAdministrador
 	attr_accessor :vista, :modelo
 	def initialize(vista, modelo)
@@ -38,6 +40,34 @@ class ControllerAdministrador
 		vista.mostrarMensaje(r,"Alumno")
 	end
 
+	def registrarPregunta
+		p = vista.solicitarDatosPregunta
+		f = FactoryPregunta.create(p)
+		otraAlternativa = true
+	    while otraAlternativa
+	      	registrarAlternativa(f)
+	      	if f.alternativas.size > 1
+		      	if vista.solicitarMcaOtraAlternativa == 2
+		      		otraAlternativa = false
+		      	end
+		    end
+	    end
+	    f.respuestaCorrecta = vista.solicitarRespuesta(f)
+		r = modelo.registrarPregunta(f)
+		vista.mostrarMensajePregunta
+	end
+
+	def registrarPreguntaAtomico(*arg)
+		p = arg
+		f = FactoryPregunta.create(p)
+	    f.respuestaCorrecta = arg[3]
+		for t in arg[2]
+			dt = FactoryAlternativa.create(t)
+			f.registrarAlternativa(dt)
+		end
+		modelo.registrarPregunta(f)
+	end
+
 	def registrarAlumnoAtomico(*arg)
 		p = arg
 		f = FactoryAlumno.create(p)
@@ -55,6 +85,12 @@ class ControllerAdministrador
 		alumno.registrarTutor(f)
 	end
 
+	def registrarAlternativa(pregunta)
+		p = vista.solicitarDatosAlternativa(pregunta.alternativas.size+1)
+		f = FactoryAlternativa.create(p)
+		pregunta.registrarAlternativa(f)
+	end
+
 	def clonarTutor(t,p,alumno)
 		dt = [t.nombre, t.apellido, p, t.dni]
 		f = FactoryTutor.create(dt)
@@ -64,5 +100,19 @@ class ControllerAdministrador
 	def listarAlumnos
 		l = modelo.alumnos
 		vista.listarAlumnos(l)
+	end
+
+	def buscarAlumno(dni)
+		for alumno in modelo.alumnos
+			if alumno.dni == dni
+				return alumno
+			end
+		end
+		return nil
+	end
+
+	def listarPreguntas
+		l = modelo.preguntas
+		vista.listarPreguntas(l)
 	end
 end

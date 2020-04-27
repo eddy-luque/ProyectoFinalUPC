@@ -109,11 +109,17 @@ class U
   end
 
   def crearMenu(titulo,items)
-    textoSolicitud, posiblesValores = "#{titulo}:",[]
+    textoSolicitud, posiblesValores, tipoDeDato = "#{titulo}:",[]
     for i in 0...items.size
-      textoSolicitud += "\n   #{i+1}. #{items[i]}"
-      posiblesValores.push(i+1)
+      if items[i].instance_of?Array
+        textoSolicitud += "\n   #{items[i][0]}. #{items[i][1]}"
+        posiblesValores.push(items[i][0])
+      else
+        textoSolicitud += "\n   #{i+1}. #{items[i]}"
+        posiblesValores.push(i+1)
+        tipoDeDato = 'i'
+      end
     end
-    solicitarDato(textoSolicitud, "\n'$in' no es una opción válida, intentelo otra vez!!\n", posiblesValores, 'i')
+    solicitarDato(textoSolicitud, "\n'$in' no es una opción válida, intentelo otra vez!!\n", posiblesValores, tipoDeDato)
   end
  end

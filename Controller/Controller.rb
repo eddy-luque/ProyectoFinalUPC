@@ -11,4 +11,12 @@ class Controller
 	def inicioAdm
 		vista.mostrarMenuAdministrador
 	end
+
+	def solicitarDNI
+		vista.solicitarDNI
+	end
+
+	def mostrarMensaje(m)
+		vista.mostrarMensaje(m,nil)
+	end
 end
