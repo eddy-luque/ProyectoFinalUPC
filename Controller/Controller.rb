@@ -19,4 +19,8 @@ class Controller
 	def mostrarMensaje(m)
 		vista.mostrarMensaje(m,nil)
 	end
+
+	def inicioAlumno(*arg)
+		vista.mostrarMenuAlumno(*arg)
+	end
 end

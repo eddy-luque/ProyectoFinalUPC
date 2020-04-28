@@ -52,7 +52,7 @@ class ControllerAdministrador
 		      	end
 		    end
 	    end
-	    f.respuestaCorrecta = vista.solicitarRespuesta(f)
+	    f.respuestaCorrecta = vista.solicitarRespuesta(f,"Ingrese la alternativa correcta.\n")
 		r = modelo.registrarPregunta(f)
 		vista.mostrarMensajePregunta
 	end

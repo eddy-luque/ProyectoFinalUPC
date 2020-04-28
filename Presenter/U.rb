@@ -109,7 +109,7 @@ class U
   end
 
   def crearMenu(titulo,items)
-    textoSolicitud, posiblesValores, tipoDeDato = "#{titulo}:",[]
+    textoSolicitud, posiblesValores, tipoDeDato = "#{titulo}",[]
     for i in 0...items.size
       if items[i].instance_of?Array
         textoSolicitud += "\n   #{items[i][0]}. #{items[i][1]}"

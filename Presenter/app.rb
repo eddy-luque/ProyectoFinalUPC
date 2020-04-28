@@ -35,28 +35,6 @@ class App
 	    end
 	end
 
-	def inicioAlumno
-		dni = c.solicitarDNI
-		cAdm = ControllerAdministrador.new(v, a)
-	    alumno = cAdm.buscarAlumno(dni)
-	    if(alumno==nil)
-	    	c.mostrarMensaje("El DNI ingresado no se encusntra registrado.")
-	    	inicio
-	    else
-	    	cAlumno.modelo = alumno
-		    case c.inicioAlumno
-		      when 1
-		        darExamen(alumno)
-		      when 2
-		        simularExamen(alumno)
-		      when 3
-		        verMisNotas(alumno)
-		      when 5
-		        inicio
-		    end
-	    end
-	end
-
 	def registrarAlumno
 		cAdm = ControllerAdministrador.new(v, a)
 	    cAdm.registrarAlumno
@@ -89,5 +67,47 @@ class App
 		cAdm = ControllerAdministrador.new(v, a)
 	    cAdm.listarPreguntas
 	    inicioAdm
+	end
+
+	def inicioAlumno
+		dni = c.solicitarDNI
+		cAdm = ControllerAdministrador.new(v, a)
+	    alumno = cAdm.buscarAlumno(dni)
+	    if(alumno==nil)
+	    	c.mostrarMensaje("El DNI ingresado no se encusntra registrado.")
+	    	inicio
+	    else
+		    menuAlumno(alumno,true)
+	    end
+	end
+
+	def menuAlumno(alumno,first)
+		opcion = nil
+		if first
+			opcion = c.inicioAlumno(alumno)
+		else
+			opcion = c.inicioAlumno
+		end
+		case opcion
+		when 1
+		      	if !alumno.calcularMcaAdmision
+		        	procesarExamen(alumno, true)
+		        else
+	    			c.mostrarMensaje("Usted ya dió el examen.")
+		      	end
+		    when 2
+		        procesarExamen(alumno, false)
+		    when 3
+		        verMisNotas(alumno)
+		        c.inicioAlumno
+		    when 5
+		        inicio
+		end
+	end
+
+	def procesarExamen(alumno, mcaAdmision)
+		cAlm = ControllerAlumno.new(v, alumno, a)
+		cAlm.procesarExamen(mcaAdmision)
+		menuAlumno(alumno, false)
 	end
 end

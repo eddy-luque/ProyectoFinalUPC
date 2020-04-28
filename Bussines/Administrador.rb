@@ -26,5 +26,19 @@ class Administrador
 		return nil
 	end
 
-	
+	def generarExamen
+		tipo = Random.new.rand(1..2)
+		listaPorTipo = []
+		for pregunta in preguntas
+			if pregunta.tipoExamen = tipo
+				listaPorTipo.push(pregunta)
+			end
+		end
+		listaPorTipo = listaPorTipo.shuffle
+		if tipo == 1
+			listaPorTipo[0..9]
+		elsif tipo == 2
+			listaPorTipo[0..19]
+		end
+	end
 end

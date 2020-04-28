@@ -1,13 +1,27 @@
 require_relative 'persona'
 class Alumno < Persona
-  attr_accessor :tutores
+  attr_accessor :tutores, :examenes
   def initialize(dni, apellido, nombre, edad, genero)
     super(dni, apellido, nombre)
     @tutores = []
+    @examenes = []
   end
 
   def registrarTutor(tutor)
     tutores.push(tutor)
+  end
+
+  def registrarExamen(examen)
+    examenes.push(examen)
+  end
+
+  def calcularMcaAdmision
+    for examen in examenes
+      if examen.mcaAdmision
+        return true
+      end
+    end
+    return false
   end
 
   def calcularPuntajeCS()

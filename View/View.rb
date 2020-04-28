@@ -13,7 +13,16 @@ class View
   end
 
   def mostrarMenuAdministrador
-    u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Reporte Alumno","Reporte Pregunta","Regresar"])
+    u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Registrar Vacantes","Camiar Estado Admisión","Reporte Alumno","Reporte Pregunta","Regresar"])
+  end
+
+  def mostrarMenuAlumno(*arg)
+    pre = ""
+    if arg.size > 0
+      alumno = arg[0]
+      pre = "Hola #{alumno.nombre} #{alumno.apellido}\n\n"
+    end
+    u.crearMenu("#{pre}Seleccione una opción",["Dar Examen","Simular Examen","Ver Mis Notas","Ver Ingreso","Regresar"])
   end
 
   def solicitarDNITutor
@@ -34,6 +43,10 @@ class View
 
   def solicitarDNI
     u.solicitarDato("Ingresar su DNI:", "'$in' no es un DNI correcto", nil,'dni')
+  end
+
+  def mostrarMenuPostExamen
+    u.crearMenu("Ver Resumen:",["Si", "No"])
   end
 
   def solicitarDatosTutor
@@ -70,23 +83,36 @@ class View
     return codigo, alternativa
   end
 
-  def solicitarRespuesta(pregunta)
+  def solicitarRespuesta(pregunta, textoPre)
     alternativas = []
     for alternativa in pregunta.alternativas
       alternativas.push([alternativa.codigo, alternativa.alternativa])
     end
-    u.crearMenu("Ingrese la alternativa correcta.\n#{pregunta.pregunta}",alternativas)
+    u.crearMenu("#{textoPre}#{pregunta.pregunta}",alternativas)
   end
 
   def mostrarMensaje(o, e)
     if o == 'Ok'
       puts "El #{e} se registró correctamente"
     else
-      puts "Ocurió un error: #{o}"
+      puts "\n#{o}"
     end
   end
+
   def mostrarMensajePregunta
     puts "La pregunta se registró correctamente"
+  end
+
+  def mostrarResultado(nota)
+    puts "Nota: #{nota} de 100"
+  end
+
+  def mostrarEnunciado(*arg)
+    add = ""
+    if arg.size > 0
+      add = arg[0]
+    end
+    puts "\nInicio de Examen #{add}\n---------------------\nLea e ingrese las alternativas correctas.\n"
   end
 
   def listarAlumnos(l)
