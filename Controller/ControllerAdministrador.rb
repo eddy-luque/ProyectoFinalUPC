@@ -115,4 +115,9 @@ class ControllerAdministrador
 		l = modelo.preguntas
 		vista.listarPreguntas(l)
 	end
+
+	def registrarVacante
+		c = vista.solicitarCantidadVacante # Cantidad de vacante ingresado
+		puts c.to_s
+	end
 end

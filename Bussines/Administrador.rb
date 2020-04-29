@@ -1,8 +1,9 @@
 class Administrador
-	attr_accessor :alumnos, :preguntas
+	attr_accessor :alumnos, :preguntas, :vacantes
 	def initialize()
 		@alumnos = []
 		@preguntas = []
+		@vacantes = 0
 	end
 
 	def registrarAlumno(alumno)

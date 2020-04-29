@@ -27,12 +27,20 @@ class App
 	      when 2
 	        registrarPregunta
 	      when 3
-	        listarAlumnos
+	        # listarAlumnos
+	        solicitarCantidadVacante # Registrar Vacantes
 	      when 4
 	        listarPreguntas
 	      when 5
 	        inicio
 	    end
+	end
+
+	def solicitarCantidadVacante
+		# ControllerAdministrador.registrarVacante
+		cAdm = ControllerAdministrador.new(v,a)
+		cAdm.registrarVacante
+		# a.vacantes = 11
 	end
 
 	def registrarAlumno
@@ -69,12 +77,14 @@ class App
 	    inicioAdm
 	end
 
+	
+
 	def inicioAlumno
 		dni = c.solicitarDNI
 		cAdm = ControllerAdministrador.new(v, a)
 	    alumno = cAdm.buscarAlumno(dni)
 	    if(alumno==nil)
-	    	c.mostrarMensaje("El DNI ingresado no se encusntra registrado.")
+	    	c.mostrarMensaje("El DNI ingresado no se encuentra registrado.")
 	    	inicio
 	    else
 		    menuAlumno(alumno,true)

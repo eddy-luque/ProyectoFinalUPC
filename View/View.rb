@@ -13,7 +13,8 @@ class View
   end
 
   def mostrarMenuAdministrador
-    u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Registrar Vacantes","Camiar Estado Admisión","Reporte Alumno","Reporte Pregunta","Regresar"])
+    # u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Registrar Vacantes","Camiar Estado Admisión","Reporte Alumno","Reporte Pregunta","Regresar"])
+    u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Registrar Vacantes","Cambiar Estado Admisión","Reporte Alumno","Reporte Pregunta","Regresar"])
   end
 
   def mostrarMenuAlumno(*arg)
@@ -131,4 +132,16 @@ class View
       end
     end
   end
+
+
+  def solicitarCantidadVacante
+    # return -1
+    n = u.solicitarDato("Ingrese la cantidad de vacantes",nil,nil,nil,1)
+    puts n.to_s
+    return n
+  end
+
+
+
+
 end
