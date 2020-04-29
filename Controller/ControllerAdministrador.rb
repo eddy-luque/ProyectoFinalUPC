@@ -118,6 +118,6 @@ class ControllerAdministrador
 
 	def registrarVacante
 		c = vista.solicitarCantidadVacante # Cantidad de vacante ingresado
-		puts c.to_s
+		return c
 	end
 end

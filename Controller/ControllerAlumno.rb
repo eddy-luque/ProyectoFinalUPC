@@ -8,11 +8,12 @@ class ControllerAlumno
 
 	def procesarExamen(mcaAdmision)
 		examen = modeloAdm.generarExamen
+		ptos = examen[0].calcularPuntos
 		examenDesarrollado = []
 		if mcaAdmision
-			vista.mostrarEnunciado
+			vista.mostrarEnunciado(ptos)
 		else
-			vista.mostrarEnunciado("SIMULACRO")
+			vista.mostrarEnunciado(ptos,"SIMULACRO")
 		end
 		for i in 0...examen.size
 			pregunta = examen[i]

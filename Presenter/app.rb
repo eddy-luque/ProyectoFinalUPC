@@ -39,8 +39,9 @@ class App
 	def solicitarCantidadVacante
 		# ControllerAdministrador.registrarVacante
 		cAdm = ControllerAdministrador.new(v,a)
-		cAdm.registrarVacante
-		# a.vacantes = 11
+		v = cAdm.registrarVacante # Cantidad de vacantes ingresados
+		a.vacantes = v
+		# puts "xxxx" + a.vacantes.to_s
 	end
 
 	def registrarAlumno
@@ -104,6 +105,7 @@ class App
 		        	procesarExamen(alumno, true)
 		        else
 	    			c.mostrarMensaje("Usted ya dió el examen.")
+					menuAlumno(alumno, false)
 		      	end
 		    when 2
 		        procesarExamen(alumno, false)
