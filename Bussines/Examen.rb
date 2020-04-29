@@ -13,4 +13,18 @@ class Examen
   	end
   	return nota
   end
+
+  def calcularPreguntasCorrectas
+  	correctas = 0
+  	for resultado in preguntasConRespuesta
+  		if resultado.respuesta == resultado.pregunta.respuestaCorrecta
+  			correctas += 1
+  		end
+  	end
+  	return correctas
+  end
+
+  def calcularPreguntasErroneas
+  	preguntasConRespuesta.size - calcularPreguntasCorrectas
+  end
 end

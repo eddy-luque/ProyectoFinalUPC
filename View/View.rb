@@ -104,15 +104,18 @@ class View
   end
 
   def mostrarResultado(nota)
-    puts "Nota: #{nota} de 100"
+    puts "\nNota: #{nota} de 100"
   end
 
   def mostrarEnunciado(*arg)
-    add = ""
+    add,ptos = "",0
     if arg.size > 0
+      ptos = arg[0]
+    end
+    if arg.size > 1
       add = arg[0]
     end
-    puts "\nInicio de Examen #{add}\n---------------------\nLea e ingrese las alternativas correctas.\n"
+    puts "\nInicio de Examen #{add}\n---------------------\nLea e ingrese las alternativas correctas.\nCada pregunta tiene un valor de #{ptos} puntos.\nNo hay puntos en contra.\n"
   end
 
   def listarAlumnos(l)
@@ -130,5 +133,34 @@ class View
           puts "   #{alternativa.codigo}. #{alternativa.alternativa}"
       end
     end
+  end
+
+  def verResumenExamen(examen)
+    puts "---------------------------------------------------------------------------------------------------------------"
+    puts "---------------------------------------- RESUMEN EXAMEN ADMISIÓN ----------------------------------------------"
+    puts "---------------------------------------------------------------------------------------------------------------"
+    
+    for i in 0...examen.preguntasConRespuesta.size
+      preguntaConRespuesta = examen.preguntasConRespuesta[i]
+      puts "#{i+1}. #{preguntaConRespuesta.pregunta.pregunta}"
+      for alternativa in preguntaConRespuesta.pregunta.alternativas
+          puts "   #{alternativa.codigo}. #{alternativa.alternativa}"
+      end
+      puts ""
+      puts "   Alternativa Correcta: #{preguntaConRespuesta.pregunta.respuestaCorrecta}"
+      puts "   Alternativa Marcada : #{preguntaConRespuesta.respuesta}"
+      puts "   Puntos              : #{preguntaConRespuesta.calcularPuntosRespuesta}"
+      puts "----------------------------------------------------------------------------------------"
+    end
+    puts "---------------------------------------------------------------------------------------------------------------"
+    puts "---------------------------------------------------------------------------------------------------------------"
+    puts "\n\nCada pregunta tiene un valor de #{examen.preguntasConRespuesta[0].pregunta.calcularPuntos} puntos.\nNo hay puntos en contra.\n"
+    puts "   Fecha               : #{examen.fechaCreacion.strftime("%d/%m/%Y %I:%M%p") }"
+    puts "   Respuestas Correctas: " + "#{examen.calcularPreguntasCorrectas}".rjust(4)
+    puts "   Respuestas Erroneas : " + "#{examen.calcularPreguntasErroneas}".rjust(4)
+    puts "   Nota                : " + "#{examen.calcularNota}".rjust(4)
+    puts ""
+    puts "---------------------------------------------------------------------------------------------------------------"
+    puts "---------------------------------------------------------------------------------------------------------------"
   end
 end

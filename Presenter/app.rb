@@ -94,6 +94,7 @@ class App
 		        	procesarExamen(alumno, true)
 		        else
 	    			c.mostrarMensaje("Usted ya dió el examen.")
+					menuAlumno(alumno, false)
 		      	end
 		    when 2
 		        procesarExamen(alumno, false)
