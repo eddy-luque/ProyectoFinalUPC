@@ -1,20 +1,20 @@
 require_relative "Alumno"
 class ColegioParticular < Alumno
 	attr_accessor :monto_pension, :puesto
-	def initialize(dni, apellido, nombre, edad, genero,monto_pension, puesto)
+	def initialize(dni, apellido, nombre, edad, genero,montoPension, puesto)
 		super(dni, apellido, nombre, edad, genero)
-		@monto_pension = monto_pension
+		@montoPension = montoPension
 		@puesto = puesto
 	end
 
 	def calcularPuntajeCS
-		if monto_pension <= 200
+		if montoPension <= 200
 			puntaje = 90
-		elsif monto_pension > 200 and monto_pension <= 400
+		elsif montoPension > 200 and montoPension <= 400
 			puntaje = 70
-		elsif monto_pension > 400 and monto_pension <= 600
+		elsif montoPension > 400 and montoPension <= 600
 			puntaje = 50
-		elsif monto_pension > 600
+		elsif montoPension > 600
 			puntaje = 40
 		end
 		return puntaje
