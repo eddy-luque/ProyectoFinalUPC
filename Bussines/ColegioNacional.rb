@@ -11,14 +11,14 @@ class ColegioNacional < Alumno
 		when "Rural"
 			puntaje = 100
 		when "Urbana"
-			puntaje = 80
+			puntajecs = 80
 		end
 		return puntaje
 	end
 
 	def calcularPuntajeRE
 		if promedioPonderado >= 19
-			puntajere = 100
+			puntaje = 100
 		elsif promedioPonderado >= 18 and promedioPonderado < 19
 			puntaje = 80
 		elsif promedioPonderado >= 16 and promedioPonderado < 18

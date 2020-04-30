@@ -9,29 +9,29 @@ class ColegioParticular < Alumno
 
 	def calcularPuntajeCS
 		if monto_pension <= 200
-			puntajecs = 90
+			puntaje = 90
 		elsif monto_pension > 200 and monto_pension <= 400
-			puntajecs = 70
+			puntaje = 70
 		elsif monto_pension > 400 and monto_pension <= 600
-			puntajecs = 50
+			puntaje = 50
 		elsif monto_pension > 600
-			puntajecs = 40
+			puntaje = 40
 		end
-		return puntajecs
+		return puntaje
 	end
 
 	def calcularPuntajeRE
 		if puesto <= 3
-			puntajere = 100
+			puntaje = 100
 		elsif puesto >= 4 and puesto <= 5
-			puntajere = 80
+			puntaje = 80
 		elsif puesto >= 6 and puesto <=10
-			puntajere = 60
+			puntaje = 60
 		elsif puesto >= 11 and puesto <= 20
-			puntajere = 40
+			puntaje = 40
 		elsif puesto <= 19
-			puntajere = 0
+			puntaje = 0
 		end
-		return puntajere
+		return puntaje
 	end
 end
