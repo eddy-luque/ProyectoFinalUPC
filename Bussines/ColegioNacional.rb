@@ -5,4 +5,14 @@ class ColegioNacional < Alumno
 		super(dni, apellido, nombre, edad, genero)
 		@zona, @promedioPonderado = zona, promedioPonderado
 	end
+
+	def calcularPuntajeCS
+		case zona
+		when "Rural"
+			puntaje = 100
+		when "Urbana"
+			puntaje = 80
+		end
+		return puntaje
+	end
 end
