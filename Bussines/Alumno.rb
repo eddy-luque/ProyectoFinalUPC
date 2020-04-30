@@ -3,6 +3,8 @@ class Alumno < Persona
   attr_accessor :tutores, :examenes
   def initialize(dni, apellido, nombre, edad, genero)
     super(dni, apellido, nombre)
+    @edad = edad
+    @genero = genero
     @tutores = []
     @examenes = []
   end
