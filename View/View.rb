@@ -28,15 +28,15 @@ class View
   end
 
   def solicitarParentesco
-    u.crearMenu("Seleccionar Parentesco",["Madre", "Padre", "Tio/Tia", "Otro"])
+    u.crearMenu("Seleccionar Parentesco",["Madre", "Padre", "Tío/Tía", "Otro"])
   end
 
   def solicitarMcaOtraAlternativa
-    u.crearMenu("¿Desea registrar otra Alternativa?",["Si", "No"])
+    u.crearMenu("¿Desea registrar otra Alternativa?",["Sí", "No"])
   end
 
   def solicitarMcaOtroTutor
-    u.crearMenu("¿Desea registrar otro tutor?",["Si", "No"])
+    u.crearMenu("¿Desea registrar otro tutor?",["Sí", "No"])
   end
 
   def solicitarDNI
@@ -44,7 +44,7 @@ class View
   end
 
   def mostrarMenuPostExamen
-    u.crearMenu("Ver Resumen:",["Si", "No"])
+    u.crearMenu("¿Ver Resultado?:",["Sí", "No"])
   end
 
   def solicitarDatosTutor
@@ -56,16 +56,20 @@ class View
 
   def solicitarDatosAlumno
     dni = u.solicitarDato("Ingresar DNI del Alumno:", "'$in' no es un DNI correcto", nil,'dni')
-    nombre = u.solicitarDato("Nombre:", nil, nil, nil,2,25)
-    apellido = u.solicitarDato("Apellido:", nil, nil,nil,2,25)
-    edad = u.solicitarDato("Edad:", nil, nil,'i',11,15)
+    nombre = u.solicitarDato("Nombre:", nil, nil, nil, 2, 25)
+    apellido = u.solicitarDato("Apellido:", nil, nil, nil, 2, 25)
+    edad = u.solicitarDato("Edad:", nil, nil,'i', 11, 15)
     genero = u.crearMenu("Genero",["Masculino","Femenino"])
     tipoColegio = u.crearMenu("Colegio",["Nacional","Particular"])
     case tipoColegio
       when 1
         zona = u.crearMenu("Zona",["Rural","Urbano"])
-        promedioPonderado = u.solicitarDato("Promedio Ponderado:", nil, nil,'i',1,20)
+        promedioPonderado = u.solicitarDato("Promedio Ponderado:", nil, nil,'i', 1, 20)
         return tipoColegio, dni, nombre, apellido, edad, genero, zona, promedioPonderado
+      when 2
+        montoPension = u.solicitarDato("Monto de Pensión:", "Ingresar valor numérico válido", nil,'i', nil, nil)
+        puesto = u.solicitarDato("Puesto:", "Ingresar valor numérico válido", nil,'i', nil, nil)
+        return tipoColegio, dni, nombre, apellido, edad, genero, montoPension, puesto
     end
   end
 
@@ -140,23 +144,19 @@ class View
     end
   end
 
-
-
   def solicitarCantidadVacante
     # return -1
     n = u.solicitarDato("Ingrese la cantidad de vacantes",nil,nil,'i',1)
     return n
   end
 
-
-
-  def verResumenExamen(examen)
+  def verResumenExamen(e)
     puts "---------------------------------------------------------------------------------------------------------------"
-    puts "---------------------------------------- RESUMEN EXAMEN ADMISIÓN ----------------------------------------------"
+    puts "------------------------------------- RESULTADO DETALLADO ADMISIÓN --------------------------------------------"
     puts "---------------------------------------------------------------------------------------------------------------"
     
-    for i in 0...examen.preguntasConRespuesta.size
-      preguntaConRespuesta = examen.preguntasConRespuesta[i]
+    for i in 0...e.preguntasConRespuesta.size
+      preguntaConRespuesta = e.preguntasConRespuesta[i]
       puts "#{i+1}. #{preguntaConRespuesta.pregunta}"
       for alternativa in preguntaConRespuesta.alternativas
           puts "   #{alternativa.codigo}. #{alternativa.alternativa}"
@@ -169,14 +169,48 @@ class View
     end
     puts "---------------------------------------------------------------------------------------------------------------"
     puts "---------------------------------------------------------------------------------------------------------------"
-    puts "\n\nCada pregunta tiene un valor de #{examen.preguntasConRespuesta[0].calcularPuntos} puntos.\nNo hay puntos en contra.\n"
-    puts "   Fecha               : #{examen.fechaCreacion.strftime("%d/%m/%Y %I:%M%p") }"
-    puts "   Respuestas Correctas: " + "#{examen.calcularPreguntasCorrectas}".rjust(4)
-    puts "   Respuestas Erroneas : " + "#{examen.calcularPreguntasErroneas}".rjust(4)
-    puts "   Nota                : " + "#{examen.calcularNota}".rjust(4)
+    puts "\n\nCada pregunta tiene un valor de #{e.preguntasConRespuesta[0].calcularPuntos} puntos.\nNo hay puntos en contra.\n"
+    puts "   Fecha               : #{e.fechaCreacion.strftime("%d/%m/%Y %I:%M%p") }"
+    puts "   Respuestas Correctas: " + "#{e.calcularPreguntasCorrectas}".rjust(4)
+    puts "   Respuestas Erroneas : " + "#{e.calcularPreguntasErroneas}".rjust(4)
+    puts "   Nota                : " + "#{e.calcularNota}".rjust(4)
     puts ""
     puts "---------------------------------------------------------------------------------------------------------------"
     puts "---------------------------------------------------------------------------------------------------------------"
+  end
+
+  def reporteAlumno(a)
+    puts "---------------------------------------------------------------------------------------------------------------"
+    puts "DNI: #{a.dni}"
+    puts "Apellidos y Nombre: #{a.apellido}, #{a.nombre}"
+    puts "Edad: #{a.edad}"
+    puts "Género: #{case a.genero when 1 then "Masculino"
+                                  when 2 then "Femenino" else "" end}"
+    puts "Tutor(es):"
+    for t in a.tutores
+      puts " - #{t.dni} #{t.apellido}, #{t.nombre} (#{case t.parentesco when 1 then "Madre"
+                                                                        when 2 then "Padre"
+                                                                        when 3 then "Tío/Tía"
+                                                                        when 4 then "Otro" else "" end})"
+    end
+
+    puts "a."
+
+    for e in a.examenes
+      if e.mcaAdmision
+        puts
+        puts verResumenExamen(e)
+        puntajeEC = e.calcularNota
+      end
+    end
+
+    puts "-------------------------------------- EVALUACIÓN FINAL DE INGRESO --------------------------------------------"
+    puts "Puntaje - Calificación socioeconómica: #{a.calcularPuntajeCS}"
+    puts "Puntaje - Rendimiento en el 2do grado: #{a.calcularPuntajeRE}"
+    puts "Puntaje - Evaluación de conocimiento: #{puntajeEC}"
+    puts "---------------------------------------------------------------------------------------------------------------"
+    puts "PUNTAJE FINAL: "
+    puts "ESTADO: "
   end
 
 end
