@@ -14,7 +14,9 @@ class FactoryAlumno
 			promedioPonderado = arg[7]
 			ColegioNacional.new(dni, apellido, nombre, edad, genero, zona, promedioPonderado)
 		when 2
-			ColegioParticular.new(*arg)
+			montoPension = arg[6]
+			puesto = arg[7]
+			ColegioParticular.new(dni, apellido, nombre, edad, genero, montoPension, puesto)
 		end
 	end
 end
