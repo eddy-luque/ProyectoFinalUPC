@@ -1,6 +1,6 @@
 require_relative 'persona'
 class Alumno < Persona
-  attr_accessor :tutores, :examenes
+  attr_accessor :edad, :genero, :tutores, :examenes
   def initialize(dni, apellido, nombre, edad, genero)
     super(dni, apellido, nombre)
     @edad = edad

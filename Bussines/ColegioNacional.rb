@@ -7,9 +7,9 @@ class ColegioNacional < Alumno
 	end
 
 	def calcularPuntajeCS
-		if zona == "Rural"
+		if zona == 1
 		puntaje = 100
-		elsif zona == "Urbana"
+		elsif zona == 2
 		puntaje = 80
 		end
 		return puntaje

@@ -194,8 +194,6 @@ class View
                                                                         when 4 then "Otro" else "" end})"
     end
 
-    puts "a."
-
     for e in a.examenes
       if e.mcaAdmision
         puts
@@ -205,9 +203,12 @@ class View
     end
 
     puts "-------------------------------------- EVALUACIÓN FINAL DE INGRESO --------------------------------------------"
-    
+    puts "Puntaje - Calificación socioeconómica: #{a.calcularPuntajeCS}"
+    puts "Puntaje - Rendimiento en el 2do grado: #{a.calcularPuntajeRE}"
+    puts "Puntaje - Evaluación de conocimiento: #{puntajeEC}"
     puts "---------------------------------------------------------------------------------------------------------------"
-    puts "PUNTAJE FINAL: "
+    puntajeFinal = ((a.calcularPuntajeCS * 0.2) + (a.calcularPuntajeRE * 0.3) + (puntajeEC * 0.5)).round(2)
+    puts "PUNTAJE FINAL: #{puntajeFinal}"
     puts "ESTADO: "
   end
 

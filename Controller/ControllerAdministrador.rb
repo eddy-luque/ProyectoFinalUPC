@@ -120,4 +120,8 @@ class ControllerAdministrador
 		c = vista.solicitarCantidadVacante # Cantidad de vacante ingresado
 		return c
 	end
+
+	def reporteAlumno(a)
+		vista.reporteAlumno(a)
+	end
 end
