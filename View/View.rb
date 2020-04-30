@@ -58,7 +58,7 @@ class View
     dni = u.solicitarDato("Ingresar DNI del Alumno:", "'$in' no es un DNI correcto", nil,'dni')
     nombre = u.solicitarDato("Nombre:", nil, nil, nil,2,25)
     apellido = u.solicitarDato("Apellido:", nil, nil,nil,2,25)
-    edad = u.solicitarDato("Edad:", nil, nil,'i',7,120)
+    edad = u.solicitarDato("Edad:", nil, nil,'i',11,15)
     genero = u.crearMenu("Genero",["Masculino","Femenino"])
     tipoColegio = u.crearMenu("Colegio",["Nacional","Particular"])
     case tipoColegio
