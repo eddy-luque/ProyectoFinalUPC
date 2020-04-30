@@ -46,7 +46,9 @@ class ControllerAdministrador
 		otraAlternativa = true
 	    while otraAlternativa
 	      	registrarAlternativa(f)
-	      	if f.alternativas.size > 1
+	      	if f.alternativas.size == 5
+	      		otraAlternativa = false
+	      	elsif f.alternativas.size > 1
 		      	if vista.solicitarMcaOtraAlternativa == 2
 		      		otraAlternativa = false
 		      	end
