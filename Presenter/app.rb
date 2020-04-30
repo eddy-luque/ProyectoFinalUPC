@@ -32,6 +32,8 @@ class App
 	      when 4
 	        listarPreguntas
 	      when 5
+	      	reporteAlumno
+	      else
 	        inicio
 	    end
 	end
@@ -78,8 +80,6 @@ class App
 	    inicioAdm
 	end
 
-	
-
 	def inicioAlumno
 		dni = c.solicitarDNI
 		cAdm = ControllerAdministrador.new(v, a)
@@ -122,4 +122,17 @@ class App
 		cAlm.procesarExamen(mcaAdmision)
 		menuAlumno(alumno, false)
 	end
+
+	def reporteAlumno
+		dni = c.solicitarDNI
+		cAdm = ControllerAdministrador.new(v, a)
+	    alumno = cAdm.buscarAlumno(dni)
+	    if(alumno==nil)
+	    	c.mostrarMensaje("El DNI ingresado no se encuentra registrado.")
+	    else
+	    	cAdm.reporteAlumno(alumno)
+	    end
+	    inicioAdm
+	end
+	
 end
