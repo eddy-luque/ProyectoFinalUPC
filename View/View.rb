@@ -205,9 +205,7 @@ class View
     end
 
     puts "-------------------------------------- EVALUACIÓN FINAL DE INGRESO --------------------------------------------"
-    puts "Puntaje - Calificación socioeconómica: #{a.calcularPuntajeCS}"
-    puts "Puntaje - Rendimiento en el 2do grado: #{a.calcularPuntajeRE}"
-    puts "Puntaje - Evaluación de conocimiento: #{puntajeEC}"
+    
     puts "---------------------------------------------------------------------------------------------------------------"
     puts "PUNTAJE FINAL: "
     puts "ESTADO: "
