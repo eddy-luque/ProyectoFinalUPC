@@ -20,5 +20,20 @@ class ColegioParticular < Alumno
 			puntajecs = 40
 		end
 		return puntajecs
-	end			 
+	end
+
+	def calcularPuntajeRE
+		if puesto <= 3
+			puntajere = 100
+		elsif puesto >= 4 and puesto <= 5
+			puntajere = 80
+		elsif puesto >= 6 and puesto <=10
+			puntajere = 60
+		elsif puesto >= 11 and puesto <= 20
+			puntajere = 40
+		elsif puesto <= 19
+			puntajere = 0
+		end
+		return puntajere
+	end
 end
