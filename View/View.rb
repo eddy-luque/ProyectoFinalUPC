@@ -4,9 +4,6 @@ class View
   def initialize
     @u = U.instance
   end
-  def listar(v)
-    puts imprimirArreglo([[1,2],[3,5]])
-  end
 
   def mostrarMenuRol
     u.crearMenu("Seleccione Rol",["Alumno","Administrador"])
@@ -84,10 +81,17 @@ class View
     return codigo, alternativa
   end
 
-  def solicitarRespuesta(pregunta, textoPre)
+  def solicitarRespuesta(pregunta, textoPre,*arg)
+    mcaAdmision = false
+    if arg.size > 0
+      mcaAdmision = arg[0]
+    end
     alternativas = []
     for alternativa in pregunta.alternativas
       alternativas.push([alternativa.codigo, alternativa.alternativa])
+    end
+    if !mcaAdmision
+      alternativas.push([".", "Presione punto (.) para omitir y continuar", true])
     end
     u.crearMenu("#{textoPre}#{pregunta.pregunta}",alternativas)
   end
@@ -153,19 +157,19 @@ class View
     
     for i in 0...examen.preguntasConRespuesta.size
       preguntaConRespuesta = examen.preguntasConRespuesta[i]
-      puts "#{i+1}. #{preguntaConRespuesta.pregunta.pregunta}"
-      for alternativa in preguntaConRespuesta.pregunta.alternativas
+      puts "#{i+1}. #{preguntaConRespuesta.pregunta}"
+      for alternativa in preguntaConRespuesta.alternativas
           puts "   #{alternativa.codigo}. #{alternativa.alternativa}"
       end
       puts ""
-      puts "   Alternativa Correcta: #{preguntaConRespuesta.pregunta.respuestaCorrecta}"
+      puts "   Alternativa Correcta: #{preguntaConRespuesta.respuestaCorrecta}"
       puts "   Alternativa Marcada : #{preguntaConRespuesta.respuesta}"
       puts "   Puntos              : #{preguntaConRespuesta.calcularPuntosRespuesta}"
       puts "----------------------------------------------------------------------------------------"
     end
     puts "---------------------------------------------------------------------------------------------------------------"
     puts "---------------------------------------------------------------------------------------------------------------"
-    puts "\n\nCada pregunta tiene un valor de #{examen.preguntasConRespuesta[0].pregunta.calcularPuntos} puntos.\nNo hay puntos en contra.\n"
+    puts "\n\nCada pregunta tiene un valor de #{examen.preguntasConRespuesta[0].calcularPuntos} puntos.\nNo hay puntos en contra.\n"
     puts "   Fecha               : #{examen.fechaCreacion.strftime("%d/%m/%Y %I:%M%p") }"
     puts "   Respuestas Correctas: " + "#{examen.calcularPreguntasCorrectas}".rjust(4)
     puts "   Respuestas Erroneas : " + "#{examen.calcularPreguntasErroneas}".rjust(4)

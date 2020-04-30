@@ -112,6 +112,9 @@ class U
     textoSolicitud, posiblesValores, tipoDeDato = "#{titulo}",[]
     for i in 0...items.size
       if items[i].instance_of?Array
+        if items[i].size == 3 && items[i]
+          textoSolicitud += "\n"
+        end
         textoSolicitud += "\n   #{items[i][0]}. #{items[i][1]}"
         posiblesValores.push(items[i][0])
       else

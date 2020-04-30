@@ -1,12 +1,14 @@
-class PreguntaConRespuesta
-  attr_accessor :pregunta, :respuesta
-  def initialize(pregunta, respuesta)
-    @pregunta, @respuesta = pregunta, respuesta
+require_relative 'Pregunta'
+class PreguntaConRespuesta < Pregunta
+  attr_accessor :respuesta
+  def initialize(pregunta, tipoExamen)
+  	super(pregunta, tipoExamen)
+    @respuesta = nil
   end
 
   def calcularPuntosRespuesta
-  	if pregunta.respuestaCorrecta == respuesta
-  		return pregunta.calcularPuntos
+  	if respuestaCorrecta == respuesta
+  		return calcularPuntos
   	end
   	return 0
   end

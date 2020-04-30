@@ -186,4 +186,3 @@ a.registrarPreguntaAtomico("Contiene la africada:", 2, [["a","Si no llama, nunca
 a.registrarPreguntaAtomico("¿Cuántos fonemas sonoros hay en: 'Más vale tarde que nunca'?.", 2, [["a","8"], ["b","9"], ["c","10"], ["d","11"], ["e","12"]], "d")
 
 a.inicio
-# puts "*"*20

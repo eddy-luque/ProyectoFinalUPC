@@ -1,5 +1,6 @@
 require_relative '../Factory/FactoryPreguntaConRespuesta'
 require_relative '../Factory/FactoryExamen'
+require_relative '../Factory/FactoryAlternativa'
 class ControllerAlumno
 	attr_accessor :vista, :modelo, :modeloAdm
 	def initialize(vista, modelo, modeloAdm)
@@ -17,8 +18,18 @@ class ControllerAlumno
 		end
 		for i in 0...examen.size
 			pregunta = examen[i]
-			respuesta = vista.solicitarRespuesta(pregunta, "#{i + 1}. ")
-			f = FactoryPreguntaConRespuesta.create(pregunta, respuesta)
+			f = FactoryPreguntaConRespuesta.create(pregunta.pregunta, pregunta.tipoExamen)
+			elNuevoOrden = pregunta.alternativas.shuffle
+			for j in 0...elNuevoOrden.size
+				letra = (j+97).chr
+				fA = FactoryAlternativa.create([letra,elNuevoOrden[j].alternativa])
+				f.registrarAlternativa(fA)
+				if elNuevoOrden[j].codigo == pregunta.respuestaCorrecta
+					f.respuestaCorrecta = letra
+				end
+			end
+			respuesta = vista.solicitarRespuesta(f, "#{i + 1}. ",mcaAdmision)
+			f.respuesta = respuesta
 			examenDesarrollado.push(f)
 		end
 		fe = FactoryExamen.create(mcaAdmision,examenDesarrollado)

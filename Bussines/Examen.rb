@@ -7,8 +7,8 @@ class Examen
   def calcularNota
   	nota = 0
   	for resultado in preguntasConRespuesta
-  		if resultado.respuesta == resultado.pregunta.respuestaCorrecta
-  			nota += resultado.pregunta.calcularPuntos
+  		if resultado.respuesta == resultado.respuestaCorrecta
+  			nota += resultado.calcularPuntos
   		end
   	end
   	return nota
@@ -17,7 +17,7 @@ class Examen
   def calcularPreguntasCorrectas
   	correctas = 0
   	for resultado in preguntasConRespuesta
-  		if resultado.respuesta == resultado.pregunta.respuestaCorrecta
+  		if resultado.respuesta == resultado.respuestaCorrecta
   			correctas += 1
   		end
   	end

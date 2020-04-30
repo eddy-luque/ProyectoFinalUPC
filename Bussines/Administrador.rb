@@ -31,7 +31,7 @@ class Administrador
 		tipo = Random.new.rand(1..2)
 		listaPorTipo = []
 		for pregunta in preguntas
-			if pregunta.tipoExamen = tipo
+			if pregunta.tipoExamen == tipo
 				listaPorTipo.push(pregunta)
 			end
 		end
