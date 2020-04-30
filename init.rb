@@ -1,8 +1,8 @@
 require_relative 'Presenter/app'
 a = App.new
-a.registrarAlumnoAtomico(1,'11332211','Rubi','Lopez Reategui',20,2,1,15,[['Juan','Lopez',1,'44332888'],['Lucia','Reategui',2,'44332777']])
-a.registrarAlumnoAtomico(1,'76576544','Ruben','Lopez Reategui',25,2,1,15,[['Juan','Lopez',1,'44332888'],['Lucia','Reategui',2,'44332777']])
-a.registrarAlumnoAtomico(1,'47155075','Heovyh','Borja Lopez',25,2,1,15,[['Dad','Borja',1,'44332881'],['Mom','Lopez',2,'44332771']])
+a.registrarAlumnoAtomico(1,'11332211','Rubi','Lopez Reategui',12,2,1,15,[['Juan','Lopez',1,'44332888'],['Lucia','Reategui',2,'44332777']])
+a.registrarAlumnoAtomico(1,'76576544','Ruben','Lopez Reategui',11,2,1,15,[['Juan','Lopez',1,'44332888'],['Lucia','Reategui',2,'44332777']])
+a.registrarAlumnoAtomico(1,'47155075','Heovyh','Borja Lopez',14,2,1,15,[['Dad','Borja',1,'44332881'],['Mom','Lopez',2,'44332771']])
 
 a.registrarPreguntaAtomico('En los enunciados: 'Sembré una planta en el jardín' y 'Me duele la planta del pie', la relación que hay entre ellos es:', 1, [['a','Hiponimia'], ['b','Homonimia'], ['c','Hiperonimia'], ['d','Polisemia'], ['e','Antonimia']], 'd')
 a.registrarPreguntaAtomico('En la oración: 'El sobre que está sobre la mesa contiene un documento nuevo sobre la propiedad colectiva', las palabras que presentan una misma forma se denominan:', 1, [['a','Sinónimas'], ['b','Parónimas'], ['c','Antónimas'], ['d','Homónimas'], ['e','Polisémicas']], 'd')
