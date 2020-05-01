@@ -20,7 +20,7 @@ class View
       alumno = arg[0]
       pre = "Hola #{alumno.nombre} #{alumno.apellido}\n\n"
     end
-    u.crearMenu("#{pre}Seleccione una opción",["Dar Examen","Simular Examen","Ver Mis Notas","Ver Ingreso","Regresar"])
+    u.crearMenu("#{pre}Seleccione una opción",["Dar Examen","Simular Examen","Regresar"])
   end
 
   def solicitarDNITutor

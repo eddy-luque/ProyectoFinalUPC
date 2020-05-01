@@ -107,10 +107,10 @@ class App
 		      	end
 		    when 2
 		        procesarExamen(alumno, false)
+		    #when 3
+		     #   verMisNotas(alumno)
+		      #  c.inicioAlumno
 		    when 3
-		        verMisNotas(alumno)
-		        c.inicioAlumno
-		    when 5
 		        inicio
 		end
 	end
