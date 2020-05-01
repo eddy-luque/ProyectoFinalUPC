@@ -30,8 +30,6 @@ class App
 	        # listarAlumnos
 	        solicitarCantidadVacante # Registrar Vacantes
 	      when 4
-	        listarPreguntas
-	      when 5
 	      	reporteAlumno
 	      else
 	        inicio

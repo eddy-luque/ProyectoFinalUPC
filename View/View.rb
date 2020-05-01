@@ -11,7 +11,7 @@ class View
 
   def mostrarMenuAdministrador
     # u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Registrar Vacantes","Camiar Estado Admisión","Reporte Alumno","Reporte Pregunta","Regresar"])
-    u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Registrar Vacantes","Cambiar Estado Admisión","Reporte Alumno","Reporte Pregunta","Regresar"])
+    u.crearMenu("Seleccione una opción",["Registrar Alumno","Registrar Pregunta","Registrar Vacantes","Reporte Alumno", "Regresar"])
   end
 
   def mostrarMenuAlumno(*arg)
