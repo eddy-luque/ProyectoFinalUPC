@@ -212,7 +212,7 @@ class View
     puts "---------------------------------------------------------------------------------------------------------------"
     puntajeFinal = ((a.calcularPuntajeCS * 0.2) + (a.calcularPuntajeRE * 0.3) + (puntajeEC * 0.5)).round(2)
     puts "PUNTAJE FINAL: #{puntajeFinal}"
-    puts "ESTADO: "
+    puts "ESTADO: NO INGRESÓ"
   end
 
 end
