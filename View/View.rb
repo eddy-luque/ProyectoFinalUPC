@@ -54,8 +54,11 @@ class View
     return nombre, apellido, parentesco
   end
 
-  def solicitarDatosAlumno
-    dni = u.solicitarDato("Ingresar DNI del Alumno:", "'$in' no es un DNI correcto", nil,'dni')
+  def solicitarDNIAlumno
+    u.solicitarDato("Ingresar DNI del Alumno:", "'$in' no es un DNI correcto", nil,'dni')
+  end
+
+  def solicitarDatosAlumno(dni)
     nombre = u.solicitarDato("Nombre:", nil, nil, nil, 2, 25)
     apellido = u.solicitarDato("Apellido:", nil, nil, nil, 2, 25)
     edad = u.solicitarDato("Edad:", nil, nil,'i', 11, 15)

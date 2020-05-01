@@ -9,35 +9,41 @@ class ControllerAdministrador
 	end
 
 	def registrarAlumno
-		p = vista.solicitarDatosAlumno
-		f = FactoryAlumno.create(p)
-		conTutor = false
-	    while !conTutor
-	      dniTutor = vista.solicitarDNITutor
-	      if f.tutores.size == 1 && dniTutor == f.tutores[0].dni
-	      	vista.mostrarMensaje("El tutor ya se encuentra registrado",nil)
-	      	if vista.solicitarMcaOtroTutor == 2
-	      		conTutor = true
-	      	end
-	      else
-	      	t = modelo.buscarTutor(dniTutor)
-		    if t == nil
-		    	registrarTutor(f,dniTutor)
-		    else
-		      	parentesco = vista.solicitarParentesco
-		      	clonarTutor(t, parentesco, f)
-		    end
-		    if f.tutores.size ==1
+		dni = vista.solicitarDNIAlumno
+		alumnoTemp = buscarAlumno(dni)
+		if alumnoTemp == nil
+			p = vista.solicitarDatosAlumno(dni)
+			f = FactoryAlumno.create(p)
+			conTutor = false
+		    while !conTutor
+		      dniTutor = vista.solicitarDNITutor
+		      if f.tutores.size == 1 && dniTutor == f.tutores[0].dni
+		      	vista.mostrarMensaje("El tutor ya se encuentra registrado",nil)
 		      	if vista.solicitarMcaOtroTutor == 2
 		      		conTutor = true
-		    	end
-		    else
-		      	conTutor = true
+		      	end
+		      else
+		      	t = modelo.buscarTutor(dniTutor)
+			    if t == nil
+			    	registrarTutor(f,dniTutor)
+			    else
+			      	parentesco = vista.solicitarParentesco
+			      	clonarTutor(t, parentesco, f)
+			    end
+			    if f.tutores.size ==1
+			      	if vista.solicitarMcaOtroTutor == 2
+			      		conTutor = true
+			    	end
+			    else
+			      	conTutor = true
+			    end
+		      end
 		    end
-	      end
-	    end
-		r = modelo.registrarAlumno(f)
-		vista.mostrarMensaje(r,"Alumno")
+			r = modelo.registrarAlumno(f)
+			vista.mostrarMensaje(r,"Alumno")
+		else
+			vista.mostrarMensaje("El DNI ya se encuentra registrado para el alumno #{alumnoTemp.nombre} #{alumnoTemp.apellido}", nil)
+		end
 	end
 
 	def registrarPregunta
